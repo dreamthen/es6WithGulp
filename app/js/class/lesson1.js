@@ -6,7 +6,7 @@ function test() {
     // console.log(i);
     // let a = 20;
     var a = 30;
-    var a = 46;
+    var a = 48;
     console.log(a);
 }
 

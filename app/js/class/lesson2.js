@@ -1,0 +1,85 @@
+//数组解构赋值
+{
+    let a, b;
+    [a, b] = [24, 8];
+    console.log(a, b);
+}
+{
+    let a, b, reset;
+    [a, b, reset] = [24, 8];
+    console.log(a, b, reset);
+}
+{
+    let a, b, c;
+    [a, b, c = 23] = [24, 8];
+    console.log(a, b, c);
+}
+{
+    let a, b, reset;
+    [a, b, ...reset] = [24, 8, 23, 6, 3, 1, 11];
+    console.log(a, b, reset);
+}
+//对象解构赋值
+{
+    let a, b;
+    ({a, b} = {a: 24, b: 8});
+    console.log(a, b);
+}
+//应用场景
+//更换变量
+{
+    let a = 24;
+    let b = 8;
+    [a, b] = [b, a];
+    console.log(a, b);
+}
+//函数返回
+{
+    let a, b;
+
+    function f() {
+        return [24, 8];
+    }
+
+    [a, b] = f();
+    console.log(a, b);
+}
+//任意取数组元素
+{
+    let a, b, c;
+
+    function f() {
+        return [24, 8, 23, 3, 11, 1, 6];
+    }
+
+    [a, b, , , c] = f();
+    console.log(a, b, c);
+}
+{
+    let a, b, c;
+
+    function f() {
+        return [24, 8, 23, 3, 11, 1, 6];
+    }
+
+    [a, , b, ...c] = f();
+    console.log(a, b, c);
+}
+//任意取对象属性值
+{
+    let o = {a: 24, b: 8};
+    let {a, b} = o;
+    console.log(a, b);
+}
+{
+    let metaData = {
+        id: 24,
+        desc: {
+            id: 8,
+            description: "I'm yinwk",
+            descEnum: [2, 5, 6]
+        }
+    };
+    let {id: metaId, desc: {id: descId, description: descContent, descEnum: enumable}} = metaData;
+    console.log(metaId, descId, descContent, enumable);
+}
