@@ -1,12 +1,12 @@
 import gulp from "gulp";
 import gulpif from "gulp-if";
 import concat from "gulp-concat";
-import webpack from "webpack";
+import webapack from "webpack";
 import gulpWebpack from "webpack-stream";
 import named from "vinyl-named";
 import plumber from "gulp-plumber";
-import livereload from "gulp-livereload";
 import rename from "gulp-rename";
+import livereload from "gulp-livereload";
 import uglify from "gulp-uglify";
 import {log, colors} from "gulp-util";
 import {args} from "./util/args";
@@ -28,11 +28,11 @@ gulp.task("scripts", () => {
                     }
                 ]
             }
-        }, null, (error, status) => {
+        }), null, (error, status) => {
             log(`Failed '${colors.cyan('scripts')}'`, status.toString({
                 chunks: false
             }));
-        }))
+        })
         .pipe(gulp.dest("server/public/js"))
         .pipe(rename({
             basename: "cp",
