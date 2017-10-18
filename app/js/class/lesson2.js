@@ -21,15 +21,13 @@
 }
 //对象解构赋值
 {
-    let a, b;
-    ({a, b} = {a: 24, b: 8});
+    let {a, b} = {a: 23, b: 6};
     console.log(a, b);
 }
 //应用场景
 //更换变量
 {
-    let a = 24;
-    let b = 8;
+    let [a, b] = [31, 8];
     [a, b] = [b, a];
     console.log(a, b);
 }
@@ -59,17 +57,17 @@
     let a, b, c;
 
     function f() {
-        return [24, 8, 23, 3, 11, 1, 6];
+        return [24, 8, 23, 6, 11, 1, 3];
     }
 
-    [a, , b, ...c] = f();
+    [a, , , b, ...c] = f();
     console.log(a, b, c);
 }
 //任意取对象属性值
 {
-    let o = {a: 24, b: 8};
-    let {a, b} = o;
-    console.log(a, b);
+    let o = {name: "yinwk", age: 24};
+    let {name: n, age: a} = o;
+    console.log(n, a);
 }
 {
     let metaData = {
