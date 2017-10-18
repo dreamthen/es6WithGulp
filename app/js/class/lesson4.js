@@ -59,4 +59,30 @@
 {
     let number = "abc";
     console.log(number.repeat(2));
+    console.log("1".padStart(2, "0"));
+    console.log("1".padEnd(2, "0"));
+}
+
+{
+    let name = "list",
+        sayHello = "hello world";
+    console.log(`I'm ${name},${sayHello}`);
+}
+
+{
+    let user = {
+        name: "list",
+        sayHello: "hello world"
+    };
+    console.log(abc`I'm ${user.name},${user.sayHello}`);
+
+    function abc(s, v1, v2) {
+        console.log(s, v1, v2);
+        return v1 + s[1] + s[0] + v2;
+    }
+}
+
+{
+    console.log(String.raw`Hi\n4`);
+    console.log(`Hi\n3`);
 }
