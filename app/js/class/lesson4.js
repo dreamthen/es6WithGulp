@@ -54,21 +54,18 @@
     console.log(str.includes("c"));
     console.log(str.startsWith("str"));
     console.log(str.endsWith("ng"));
-}
-
-{
     let number = "abc";
     console.log(number.repeat(2));
+}
+{
     console.log("1".padStart(2, "0"));
     console.log("1".padEnd(2, "0"));
 }
-
 {
-    let name = "list",
+    let name = 'list',
         sayHello = "hello world";
     console.log(`I'm ${name},${sayHello}`);
 }
-
 {
     let user = {
         name: "list",
@@ -81,8 +78,8 @@
         return v1 + s[1] + s[0] + v2;
     }
 }
-
 {
-    console.log(String.raw`Hi\n4`);
-    console.log(`Hi\n3`);
+    let rawOne = `H\n3`;
+    console.log(rawOne);
+    console.log(String.raw`H\n3`);
 }
