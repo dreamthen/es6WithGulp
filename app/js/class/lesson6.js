@@ -39,6 +39,11 @@
 }
 
 {
+    let arr = [1, 2, 3, 4, 5];
+    console.log(arr.copyWithin(0, 2, 4));
+}
+
+{
     let arr = [1, 2, 3, 4, 5, 6, 7, 8, 99, 100, 1000, 22];
     console.log(arr.find(function finder(item, index) {
         return item > 22;
@@ -53,4 +58,20 @@
     console.log(arr.includes('aa'));
     console.log(arr.includes(99));
     console.log(arr.includes(true));
+}
+
+{
+// 2. 如何优雅地使用一行代码产生一个长度为 n 的元素值为 下标 + 1 的数组
+    function generate(n) {
+        return Array.from(Array.apply(null, {length: n}), function map(item, index) {
+            return index + 1;
+        });
+    }
+
+    console.log(generate(5)); // [1, 2, 3, 4, 5]
+}
+
+{
+    let arr = [2, 5, 8, 9, 11, 22, 1];
+    console.log(arr.copyWithin(2, 4, 6));
 }
