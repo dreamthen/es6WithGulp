@@ -36,7 +36,7 @@ gulp.task("scripts", () => {
         .pipe(gulp.dest("server/public/js"))
         .pipe(rename({
             basename: "cp",
-            extname: "min.js"
+            extname: ".min.js"
         }))
         .pipe(uglify({
             compress: {
