@@ -5,3 +5,4 @@ import "./class/lesson3";
 import "./class/lesson4";
 import "./class/lesson5";
 import "./class/lesson6";
+import "./class/lesson7";
