@@ -1,20 +1,19 @@
-//函数扩展
 {
-    function test(name, age = 26) {
-        console.log(name, age);
+    function test(name, age = 24, sayHello) {
+        console.log("name:" + name, "age:" + age, "sayHello:" + sayHello);
     }
 
-    test("yinwk", 25);
+    test("yinwk", undefined, "hello world");
 }
 
 {
     let x = "test";
 
-    function testOne(x, y = x, publicPath) {
-        console.log(x, y, publicPath);
+    function testOne(x, y = x) {
+        console.log(x, y);
     }
 
-    testOne("kill", "zzz", "publicPath");
+    testOne("kill");
 
     function testTwo(c, y = x) {
         console.log(c, y);
@@ -24,83 +23,43 @@
 }
 
 {
-    function testThree(...args) {
-        console.log(args);
-        for (let argsItem of args) {
-            console.log(argsItem);
+    //...可以把函数参数转化为数组,也可以把数组转化为字符
+    function testTest(...args) {
+        for (let argItem of args) {
+            console.log(argItem);
         }
     }
 
-    testThree([1, 4, 5, 6, 7, 22, 0]);
+    testTest(1, 4, 6, 10);
+    console.log('a', ...[1, 4, 6, 10]);
 }
 
 {
-    console.log(...[1, 2, 3, 5, 8, 10, 23]);
-    console.log('a', ...[1, 2, 3, 5, 8, 10, 23]);
+    //箭头函数
+    let arrows = v => v * 6;
+    let count = arrows(5);
+    console.log(count);
+
+    //箭头函数Ano
+    let arrowsAno = () => 8;
+    let arrowsCount = arrowsAno();
+    console.log(arrowsCount);
+
+    let arrowsThird = v => {
+        return v * 10;
+    };
+    console.log(arrowsThird(667));
 }
 
 {
-    let func = v => v * 3;
-    console.log(func(4));
-    let funcStrict = () => 5;
-    console.log(funcStrict());
-}
-
-{
-    function testFunc(x) {
-        return x * 9;
+    //伪函数
+    function testProduct(c) {
+        console.log(c);
     }
 
-    function testTest(number) {
-        return testFunc(number);
+    function testMyProduct(c) {
+        return testProduct(c + " world come true~");
     }
 
-    console.log(testTest(25));
-}
-
-//闭包
-{
-    function closure(n) {
-        for (var i = 0; i < n; i++) {
-            setTimeout(function timer() {
-                console.log(i);
-            }, i * 1000);
-        }
-    }
-
-    closure(8);
-}
-
-{
-    function closureOne(n) {
-        for (let i = 0; i < n; i++) {
-            setTimeout(function timer() {
-                console.log(i);
-            }, i * 1000);
-        }
-    }
-
-    closureOne(8);
-
-    function closureTwo(n) {
-        for (var i = 0; i < n; i++) {
-            setTimeout((function timer(i) {
-                return function () {
-                    console.log(i);
-                }
-            })(i), i * 1000);
-        }
-    }
-
-    closureTwo(8);
-
-    function closureThree(n) {
-        for (var i = 0; i < n; i++) {
-            setTimeout(function timer(i) {
-                console.log(i);
-            }.bind(this, i), i * 1000);
-        }
-    }
-
-    closureThree(8);
+    testMyProduct("yinwk");
 }
