@@ -19,8 +19,23 @@
     arr.forEach((arrItem, arrIndex) => {
         console.log(arrItem);
     });
-    let newArr = Array.from([22, 56, "world"]);
-    for(let newItemKey of newArr.keys()){
-        console.log(newItemKey);
-    }
+    console.log(arr.size);
+    // let newArr = Array.from([22, 56, "world"]);
+    // for (let newItemKey of newArr.keys()) {
+    //     console.log(newItemKey);
+    // }
+    arr.delete(false);
+    console.log(arr);
+    arr.clear();
+    console.log(arr);
+    let arrAno = new Set([24, 55, "new world"]);
+    console.log(arrAno);
+}
+
+{
+    let weakCollection = new WeakSet();
+    weakCollection.add({name: "yinwk"});
+    weakCollection.add({age: 25});
+    weakCollection.clear();
+    console.log(weakCollection);
 }
