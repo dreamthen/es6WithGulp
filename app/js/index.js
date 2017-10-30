@@ -10,3 +10,4 @@ import "./class/lesson8";
 import "./class/lesson9";
 import "./class/lesson10";
 import "./class/lesson11";
+import "./class/lesson12";
