@@ -1,117 +1,137 @@
 {
-    let arr = new Set();
-    arr.add(100);
-    arr.add(false);
-    arr.add(["world", {name: "yinwk"}]);
-    console.log(arr);
-    for (let item of arr) {
-        console.log(item);
+    //Set
+    let set = new Set();
+    let integer = '66666';
+    set.add(100);
+    set.add(["world", true]);
+    set.add({name: "Gary"});
+    set.add(integer);
+    console.log(set, set.size);
+    for (let setItem of set) {
+        console.log("let if ---", setItem);
     }
-    for (let keys of arr.keys()) {
-        console.log(keys);
+    for (let key of set.keys()) {
+        console.log("keys ---", key);
     }
-    for (let values of arr.values()) {
-        console.log(values);
+    for (let value of set.values()) {
+        console.log("values ---", value);
     }
-    for (let [key, value] of arr.entries()) {
-        console.log(key, value);
+    for (let [key, value] of set.entries()) {
+        console.log("entries ---", key, value);
     }
-    arr.forEach((arrItem, arrIndex) => {
-        console.log(arrItem);
-    });
-    console.log(arr.size);
-    // let newArr = Array.from([22, 56, "world"]);
-    // for (let newItemKey of newArr.keys()) {
-    //     console.log(newItemKey);
-    // }
-    console.log(arr.has(100));
-    arr.delete(false);
-    console.log(arr);
-    arr.clear();
-    console.log(arr);
+    set.forEach(setItem => console.log("foreach ---", setItem));
+    console.log(set.has(integer));
+    set.delete(integer);
+    console.log(set);
+    set.clear();
+    console.log(set);
     //unique
-    let arrAno = new Set([24, 55, "new world", 44, 24, 88, 100, "new world"]);
-    console.log(arrAno);
+    let setAno = new Set([1, 4, 5, 7, 10, 55, 5, 8, 10, 22, 7]);
+    console.log(setAno);
 }
 
 {
-    //WeakSet:
-    //1.无size属性
-    //2.无clear方法
-    //3.无遍历
-    let weakCollection = new WeakSet();
-    weakCollection.add({name: "yinwk"});
-    weakCollection.add({age: 25});
-    console.log(weakCollection);
-    weakCollection.delete({name: "yinwk"});
-    console.log(weakCollection);
+    //WeakSet
+    //1.no size property
+    //2.no clear function
+    //3.no 遍历
+    let weakSet = new WeakSet();
+    let o = {number: 1000};
+    weakSet.add(o);
+    console.log(weakSet, weakSet.size);
+    // for (let weakSetItem of weakSet) {
+    //     console.log(weakSetItem);
+    // }
+    console.log(weakSet.has(o));
+    // weakSet.delete(o);
+    // console.log(weakSet);
+    // weakSet.clear();
+    // console.log(weakSet);
 }
 
 {
     //Map
-    let arrMap = new Map();
-    let arr = [123];
-    let object = {name: "Gary"};
-    arrMap.set(arr, "newNumber1234567890");
-    arrMap.set(object, "Hi Guys~I'm Gary");
-    console.log(arrMap, arrMap.size, arrMap.get(arr));
-    console.log(arrMap.get(object));
-    for (let arrMapValueItem of arrMap) {
-        console.log(arrMapValueItem);
+    let map = new Map();
+    map.set('a', [123]);
+    map.set(true, "1000");
+    map.set({sayHello: true}, "sayHello");
+    console.log(map, map.size);
+    for (let mapItem of map) {
+        console.log("let of ---", mapItem);
     }
-    for (let key of arrMap.keys()) {
-        console.log(key);
+    for (let key of map.keys()) {
+        console.log("keys ---", key);
     }
-    for (let value of arrMap.values()) {
-        console.log(value);
+    for (let value of map.values()) {
+        console.log("values ---", value);
     }
-    for (let [key, value] of arrMap.entries()) {
-        console.log(`${JSON.stringify(key)}:${value}`);
+    for (let [key, value] of map.entries()) {
+        console.log("entries ---", `${JSON.stringify(key)}:${value}`);
     }
-    arrMap.forEach(function each(eachItem, eachIndex) {
-        console.log("foreach", eachItem);
-    });
-    console.log(arrMap.has(object));
-    arrMap.delete(arr);
-    console.log(arrMap);
-    arrMap.clear();
-    console.log(arrMap);
-    let map = new Map([[['gary'], "Gary is mine~"], [['gary'], "Gary is mine~"], [true, [1, 2, 3, 4, 5, 6, 7, 8, 9]]]);
+    map.forEach(mapItem => console.log("foreach ---", mapItem));
+    console.log(map.has(true));
+    map.delete(true);
     console.log(map);
+    map.clear();
+    console.log(map);
+    let mapAno = new Map([[true, "9000"], [{n: [{newItem: "new"}]}, 888]]);
+    console.log(mapAno, mapAno.size);
 }
 
 {
     //WeakMap
-    //1.no size property
-    //2.no clear function
-    //3.no 遍历
-    //4.no get function
+    //1. no size
+    //2. no clear
+    //3. no 遍历
     let weakMap = new WeakMap();
-    let weakArr = ['123'];
-    weakMap.set(weakArr, '456');
+    let o = {name: 'a'};
+    weakMap.set(o, 'a的三次方');
     console.log(weakMap, weakMap.size);
+    console.log(weakMap.has(o));
     // for (let weakMapItem of weakMap) {
     //     console.log(weakMapItem);
     // }
-    //weakMap.clear();
-    weakMap.delete(weakArr);
+    // weakMap.clear();
+    // console.log(weakMap);
+    weakMap.delete(o);
     console.log(weakMap);
 }
 
 {
-    //Map和array进行比较
+    //Set与array比较
+    let set = new Set();
+    let array = [];
+    //增
+    set.add({t: 66});
+    array.push({t: 66});
+    console.log("set-array-add", set, array);
+    //查
+    console.log("set-array-find", set.has({t: 66}), array.find(arrayItem => arrayItem.t));
+    //改
+    set.forEach(setItem => setItem.t ? setItem.t = 88 : "");
+    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : "");
+    console.log("set-array-modify", set, array);
+    //删
+    set.forEach(setItem => setItem.t ? set.delete(setItem) : "");
+    let index = array.findIndex(arrayItem => arrayItem.t ? arrayItem.t : "");
+    array.splice(index, 1);
+    console.log("set-array-delete", set, array);
+}
+
+{
+    //Map与array比较
     let map = new Map();
     let array = [];
     //增
     map.set('t', 66);
     array.push({t: 66});
     console.log("map-array-add", map, array);
+    //查
+    console.log("map-array-find", map.get('t'), map.has('t'), array.find(arrayItem => arrayItem.t));
     //改
     map.set('t', 88);
     array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
     console.log("map-array-modify", map, array);
-    //查
-    console.log(map.has('t'), array.find(arrayItem => arrayItem.t));
     //删
     map.delete('t');
     let index = array.findIndex(arrayItem => arrayItem.t ? arrayItem.t : '');
@@ -120,47 +140,26 @@
 }
 
 {
-    //Set和array比较
+    //Set,Map和Object比较
+    let setDemo = {t: 66};
     let set = new Set();
-    let array = [];
-    //增
-    set.add({t: 66});
-    array.push({t: 66});
-    console.log("set-array-add", set, array);
-    //改
-    set.forEach(setItem => setItem.t ? setItem.t = 88 : '');
-    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
-    console.log("set-array-modify", set, array);
-    //查
-    console.log(set.has({t: 88}), array.find(arrayItem => arrayItem.t));
-    //删
-    set.forEach(setItem => setItem.t ? set.delete(setItem) : '');
-    let index = array.findIndex(arrayItem => arrayItem.t ? arrayItem.t : '');
-    array.splice(index, 1);
-    console.log("set-array-delete", set, array);
-}
-
-{
-    //Map,Set和object比较
-    let item = {t: 66};
     let map = new Map();
-    let set = new Set();
-    let obj = {};
+    let o = {};
     //增
+    set.add(setDemo);
     map.set('t', 66);
-    set.add(item);
-    obj['t'] = 66;
-    console.log('map-set-array-add', map, set, obj);
-    //改
-    map.set('t', 88);
-    item['t'] = 88;
-    obj['t'] = 88;
-    console.log('map-set-array-modify', map, set, obj);
+    o['t'] = 66;
+    console.log('set-map-object-add', set, map, o);
     //查
-    console.log(map.has('t'), set.has(item), 't' in obj);
+    console.log('set-map-object-find', set.has(setDemo), map.has('t'), 't' in o);
+    //改
+    setDemo['t'] = 88;
+    map.set('t', 88);
+    o['t'] = 88;
+    console.log('set-map-object-modify', set, map, o);
     //删
+    set.delete(setDemo);
     map.delete('t');
-    set.delete(item);
-    delete obj['t'];
-    console.log('map-set-array-delete', map, set, obj);
+    delete o['t'];
+    console.log('set-map-object-delete', set, map, o);
 }
