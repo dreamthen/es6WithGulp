@@ -55,5 +55,57 @@
 
 {
     //Reflect
+    let object = {
+        time: '1993-06-30',
+        name: 'yinwk',
+        _r: 370683199606300130
+    };
+    console.log(Reflect.get(object, 'time'));
+    Reflect.set(object, 'time', '1994-03-10');
+    console.log(object);
+    console.log(Reflect.has(object, 'name'));
+}
 
+{
+    function personValidate(target, validate) {
+        return new Proxy(target, {
+            _validate: validate,
+            set(target, key, value, proxy) {
+                if (target.hasOwnProperty(key)) {
+                    let val = this._validate[key];
+                    if (!!val(value)) {
+                        return Reflect.set(target, key, value, proxy);
+                    } else {
+                        throw new Error(`${key}不能设置为${value}`);
+                    }
+                } else {
+                    throw new Error(`${key} is not found.`);
+                }
+            }
+        });
+    }
+
+    const personIsValid = {
+        name(val) {
+            return typeof val === 'string';
+        },
+        age(val) {
+            return typeof val === 'number' && val > 18;
+        }
+    };
+
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+            return personValidate(this, personIsValid);
+        }
+    }
+
+    const person = new Person('yinwk', 24);
+    console.log(person.name, person.age);
+    person.name = 'yinwkLoveZhaoyue';
+    console.log(person.name, person.age);
+    person.age = 23;
+    console.log(person.name, person.age);
 }
