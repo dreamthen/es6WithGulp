@@ -97,3 +97,70 @@
     weakMap.delete(weakArr);
     console.log(weakMap);
 }
+
+{
+    //Map和array进行比较
+    let map = new Map();
+    let array = [];
+    //增
+    map.set('t', 66);
+    array.push({t: 66});
+    console.log("map-array-add", map, array);
+    //改
+    map.set('t', 88);
+    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
+    console.log("map-array-modify", map, array);
+    //查
+    console.log(map.has('t'), array.find(arrayItem => arrayItem.t));
+    //删
+    map.delete('t');
+    let index = array.findIndex(arrayItem => arrayItem.t ? arrayItem.t : '');
+    array.splice(index, 1);
+    console.log("map-array-delete", map, array);
+}
+
+{
+    //Set和array比较
+    let set = new Set();
+    let array = [];
+    //增
+    set.add({t: 66});
+    array.push({t: 66});
+    console.log("set-array-add", set, array);
+    //改
+    set.forEach(setItem => setItem.t ? setItem.t = 88 : '');
+    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
+    console.log("set-array-modify", set, array);
+    //查
+    console.log(set.has({t: 88}), array.find(arrayItem => arrayItem.t));
+    //删
+    set.forEach(setItem => setItem.t ? set.delete(setItem) : '');
+    let index = array.findIndex(arrayItem => arrayItem.t ? arrayItem.t : '');
+    array.splice(index, 1);
+    console.log("set-array-delete", set, array);
+}
+
+{
+    //Map,Set和object比较
+    let item = {t: 66};
+    let map = new Map();
+    let set = new Set();
+    let obj = {};
+    //增
+    map.set('t', 66);
+    set.add(item);
+    obj['t'] = 66;
+    console.log('map-set-array-add', map, set, obj);
+    //改
+    map.set('t', 88);
+    item['t'] = 88;
+    obj['t'] = 88;
+    console.log('map-set-array-modify', map, set, obj);
+    //查
+    console.log(map.has('t'), set.has(item), 't' in obj);
+    //删
+    map.delete('t');
+    set.delete(item);
+    delete obj['t'];
+    console.log('map-set-array-delete', map, set, obj);
+}
