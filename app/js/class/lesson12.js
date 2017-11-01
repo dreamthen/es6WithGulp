@@ -104,5 +104,158 @@
     array.push({t: 66});
     console.log("set-array-add", set, array);
     //查
-    console.log(set.has({t: 66}), array.find(arrayItem => arrayItem.t));
+    console.log("set-array-find", set.has({t: 66}), array.find(arrayItem => arrayItem.t));
+    //改
+    set.forEach(setItem => setItem.t ? setItem.t = 88 : '');
+    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
+    console.log("set-array-modify", set, array);
+    //删
+    set.forEach(setItem => setItem.t ? set.delete(setItem) : '');
+    let index = array.findIndex(arrayItem => arrayItem.t);
+    array.splice(index, 1);
+    console.log(set, array);
+}
+
+{
+    //Map和array比较
+    let map = new Map();
+    let array = [];
+    //增
+    map.set('t', {t: 66});
+    array.push({t: 66});
+    console.log('map-array-add', map, array);
+    //查
+    console.log('map-array-find', map.has('t'), map.get('t'), array.find(arrayItem => arrayItem.t));
+    //改
+    map.set('t', {t: 88});
+    array.forEach(arrayItem => arrayItem.t ? arrayItem.t = 88 : '');
+    console.log('map-array-modify', map, array);
+    //删
+    map.delete('t');
+    let index = array.findIndex(arrayItem => arrayItem.t);
+    array.splice(index, 1);
+    console.log('map-array-delete', map, array);
+}
+
+{
+    //Set,Map和Object比较
+    let setDemo = {t: 66};
+    let set = new Set();
+    let map = new Map();
+    let o = {};
+    //增
+    set.add(setDemo);
+    map.set('t', {t: 66});
+    o['t'] = 66;
+    console.log('set-map-object-add', set, map, o);
+    //查
+    console.log('set-map-object-find', set.has(setDemo), map.has('t'), map.get('t'), 't' in o);
+    //改
+    setDemo['t'] = 88;
+    map.set('t', {t: 88});
+    o['t'] = 88;
+    console.log('set-map-object-modify', set, map, o);
+    //删
+    set.delete(setDemo);
+    map.delete('t');
+    delete o['t'];
+    console.log('set-map-object-delete', set, map, o);
+}
+
+{
+    //Proxy和Reflect
+    let person = {
+        birthday: '1993-06-30',
+        name: 'yinwk',
+        _r: 370683199306300013
+    };
+    let mirrorProxy = new Proxy(person, {
+        get(target, key) {
+            if (key === 'birthday')
+                return target[key].replace('1993', '1994');
+            else
+                return target[key];
+        },
+        set(target, key, value) {
+            if (key === 'name')
+                return target[key] = value;
+            else
+                return target[key];
+        },
+        has(target, key) {
+            if (key.indexOf('_') !== -1)
+                return target[key];
+            else
+                return false;
+
+        },
+        deleteProperty(target, key) {
+            if (key === 'name') {
+                delete target[key];
+                return true;
+            } else
+                return target[key];
+        },
+        ownKeys(target) {
+            return Object.keys(target).filter(ownKeyItem => ownKeyItem !== 'name');
+        }
+    });
+    console.log(mirrorProxy);
+    console.log(mirrorProxy['birthday']);
+    mirrorProxy['name'] = 'zhaoyue';
+    console.log(mirrorProxy);
+    mirrorProxy['birthday'] = '1994-03-10';
+    console.log(mirrorProxy);
+    console.log('name' in mirrorProxy, 'birthday' in mirrorProxy, '_r' in mirrorProxy);
+    // delete mirrorProxy['birthday'];
+    // console.log(mirrorProxy);
+    // delete mirrorProxy['_r'];
+    // console.log(mirrorProxy);
+    // delete mirrorProxy['name'];
+    console.log(mirrorProxy);
+    console.log(Reflect.ownKeys(mirrorProxy), Object.getOwnPropertyNames(mirrorProxy));
+}
+
+{
+    //Proxy and Reflect校验
+    function personValidate(target, validate) {
+        return new Proxy(target, {
+            _validate: validate,
+            set(target, key, value, proxy) {
+                if (target.hasOwnProperty(key)) {
+                    let val = this._validate[key];
+                    if (!!val(value)) {
+                        return Reflect.set(target, key, value, proxy);
+                    } else
+                        throw new Error(`${key}不能设置为${value}`);
+                } else
+                    throw new Error(`${key}不存在`);
+            }
+        });
+    }
+
+    const personCheck = {
+        name(val) {
+            return typeof val === 'string';
+        },
+        age(val) {
+            return typeof val === 'number' && val > 18;
+        }
+    };
+
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+            return personValidate(this, personCheck);
+        }
+    }
+
+    const person = new Person('yinwk', 28);
+    console.log(person);
+    // person.name = 24;
+    // console.log(person);
+    person.name = 'CLAY';
+    person.age = 24;
+    console.log(person);
 }
